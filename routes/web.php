@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     $data =[
         'title' => "Sign In",
     ];
@@ -28,3 +28,11 @@ Route::get('/register', function () {
 
     return view('register', $data);
 }) -> name('user.regist');
+
+Route::get('/', function () {
+    $data = [
+        'title' => "Home",
+    ];
+
+    return view('user.home', $data);
+});

@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data =[
+        'title' => "Sign In",
+    ];
+
+    return view('login', $data);
 });
+
+Route::get('/register', function () {
+    $data = [
+        'title' => "Sign Up",
+    ];
+
+    return view('register', $data);
+}) -> name('user.regist');

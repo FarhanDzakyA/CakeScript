@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,21 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    $data =[
-        'title' => "Sign In",
-    ];
+Route::get('/login', [LoginController::class, 'index']) -> name('login') -> middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-    return view('login', $data);
-});
-
-Route::get('/register', function () {
-    $data = [
-        'title' => "Sign Up",
-    ];
-
-    return view('register', $data);
-}) -> name('user.regist');
+Route::get('/register', [RegisteredUserController::class, 'index']) -> name('regist') -> middleware('guest');
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::get('/', function () {
     $data = [
@@ -35,4 +28,4 @@ Route::get('/', function () {
     ];
 
     return view('user.home', $data);
-});
+})->middleware('auth');

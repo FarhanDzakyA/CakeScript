@@ -37,14 +37,21 @@
                 <!-- Dropdown Menu with absolute positioning -->
                 <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-300 rounded-lg shadow dark:bg-white absolute top-full mt-2 right-0" id="user-dropdown">
                     <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 truncate">Bonnie Green</span>
+                        @if(auth()->check())
+                            <span class="block text-sm text-gray-900 truncate">{{ auth()->user()->nama_pelanggan }}</span>
+                        @else
+                            <span class="block text-sm text-gray-900 truncate"></span>
+                        @endif
                     </div>
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Profile</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Sign Out</a>
+                            <form action="{{ url('/logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="block px-4 py-2 w-full text-sm text-start text-gray-700 hover:bg-gray-300">Sign Out</button>
+                            </form>
                         </li>
                     </ul>
                 </div>

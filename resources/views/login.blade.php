@@ -13,27 +13,37 @@
             <p class="mb-4 text-4xl font-sans font-bold">Sign In to your Account</p>
             <p class="text-lg font-sans font-normal mb-6">Ready to treat yourself? Sign in to explore <br> delicious cakes made just for you.</p>
 
-            <form action="" class="w-full mb-6">
+            <form action="{{ url('/login') }}" method="POST" class="w-full mb-6">
                 @csrf
 
-                <div class="mb-4">
+                <div class="mb-3">
                     <label for="username" class="text-lg font-sans font-bold">Username</label>
-                    <div class="relative mt-2">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <div class="relative mt-2 flex items-center">
+                        <div class="absolute left-3 flex items-center h-full pointer-events-none">
                             <i class="fa-solid fa-user" style="color: #4b5563;"></i>
                         </div>
-                        <input type="text" id="username" name="" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter your username">
+                        <input type="text" id="username" name="nama_pelanggan" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter the full name used when register account" value="{{ old('nama_pelanggan') }}" autofocus>
                     </div>
+                    <p class="text-sm font-medium text-red-600 h-2">
+                        @error('nama_pelanggan')
+                            {{ $message }}
+                        @enderror
+                    </p>
                 </div>
 
                 <div class="mb-8">
                     <label for="password" class="text-lg font-sans font-bold">Password</label>
-                    <div class="relative mt-2 mb-1">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <div class="relative mt-2 mb-1 flex items-center">
+                        <div class="absolute left-3 flex items-center h-full pointer-events-none">
                             <i class="fa-solid fa-lock" style="color: #4b5563;"></i>
                         </div>
-                        <input type="text" id="password" name="" class="w-full bg-transparent border-2 border-gray-600 font-sans text-gray-600 text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter your password">
+                        <input type="password" id="password" name="password" class="w-full bg-transparent border-2 border-gray-600 font-sans text-gray-600 text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter your password">
                     </div>
+                    <p class="flex justify-start text-sm font-medium text-red-600 h-2">
+                        @error('password')
+                            {{ $message }}
+                        @enderror
+                    </p>
                     <div class="flex justify-end">
                         <a href="" class="text-blue-700 font-sans text-base">Forgot Password?</a>
                     </div>
@@ -47,7 +57,7 @@
             </form>
 
             <div class="self-center">
-                <a href="{{ route('user.regist') }}" class="font-sans font-normal text-base">Don't you have an account? <span class="text-blue-700">Sign Up!</span></a>
+                <a href="{{ route('regist') }}" class="font-sans font-normal text-base">Don't you have an account? <span class="text-blue-700">Sign Up!</span></a>
             </div>
         </div>
 

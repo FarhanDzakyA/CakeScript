@@ -29,3 +29,27 @@ Route::get('/', function () {
 
     return view('user.home', $data);
 })->middleware('auth');
+
+Route::get('/menu', function () {
+    $data = [
+        'title' => "Menu",
+    ];
+
+    return view('user.menu', $data);
+})->name('menu')->middleware('auth');
+
+Route::get('/about', function () {
+    $data = [
+        'title' => "About Us",
+    ];
+
+    return view('user.about_us', $data);
+})->name('about')->middleware('auth');
+
+Route::get('/contact', function () {
+    $data = [
+        'title' => "Contact",
+    ];
+    
+    return view('user.contact', $data);
+})->name('contact')->middleware('auth');

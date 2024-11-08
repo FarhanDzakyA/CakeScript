@@ -9,16 +9,16 @@
         <div class="absolute left-1/2 transform -translate-x-1/2" id="navbar-user">
             <ul class="flex space-x-8 font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-leaf rtl:space-x-reverse md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-leaf md:dark:bg-leaf dark:border-gray-700">
                 <li>
-                    <a href="#" class="block p-0 text-white bg-leaf rounded underline underline-offset-4 decoration-cyan-500 decoration-2" aria-current="page">Home</a>
+                    <a href="{{ url('/') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('/') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}" aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="#" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2">Menu</a>
+                    <a href="{{ route('menu') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('menu') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}">Menu</a>
                 </li>
                 <li>
-                    <a href="#" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2">About Us</a>
+                    <a href="{{ route('about') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('about') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}">About Us</a>
                 </li>
                 <li>
-                    <a href="#" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2">Contact</a>
+                    <a href="{{ route('contact') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('contact') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}">Contact</a>
                 </li>
             </ul>
         </div>
@@ -35,7 +35,7 @@
                 </button>
     
                 <!-- Dropdown Menu with absolute positioning -->
-                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-300 rounded-lg shadow dark:bg-white absolute top-full mt-2 right-0" id="user-dropdown">
+                <div class="z-50 hidden my-4 text-base list-none bg-gray-50 divide-y divide-gray-300 rounded-lg shadow absolute top-full mt-2 right-0" id="user-dropdown">
                     <div class="px-4 py-3">
                         @if(auth()->check())
                             <span class="block text-sm text-gray-900 truncate">{{ auth()->user()->nama_pelanggan }}</span>

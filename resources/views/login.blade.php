@@ -62,7 +62,7 @@
         </div>
 
         <!-- Copyright notice positioned at the bottom -->
-        <p class="self-center font-sans text-base text-gray-400 mb-4">&copy; 2023 CakeScript</p>
+        <p class="self-center font-sans text-base text-gray-400 mb-4">&copy; Copyright by CakeScript. All rights reserved.</p>
     </div>
 </div>
 @endsection

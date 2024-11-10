@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
 
+    <script src="{{ asset('js/userapp.js') }}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -20,31 +22,18 @@
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
-<body>
+<body class="overflow-x-hidden">
     @if (!request()->routeIs('login') && !request()->routeIs('regist'))
         @include('component.navbar')
     @endif
 
     @yield('content')
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const userMenuButton = document.getElementById('user-menu-button');
-            const userDropdown = document.getElementById('user-dropdown');
-
-            if (userMenuButton && userDropdown) {
-                userMenuButton.addEventListener('click', () => {
-                    userDropdown.classList.toggle('hidden');
-                });
-
-                document.addEventListener('click', (event) => {
-                    if (!userMenuButton.contains(event.target) && !userDropdown.contains(event.target)) {
-                        userDropdown.classList.add('hidden');
-                    }
-                });
-            }
-        });
-    </script>
+    @if (!request()->routeIs('login') && !request()->routeIs('regist'))
+        @include('component.back_to_top')
+        @include('component.footer')
+    @endif
 </body>
 </html>

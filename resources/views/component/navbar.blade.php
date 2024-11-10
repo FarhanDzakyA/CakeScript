@@ -1,7 +1,7 @@
 <nav class="bg-leaf border-gray-200 relative">
     <div class="max-w-screen flex items-center justify-between mx-4 p-4">    
         <!-- Logo aligned to the start -->
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('img/BrandIcon.png') }}" class="h-8 bg-white" alt="Brand Icon">
         </a>
 

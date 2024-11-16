@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,34 +23,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisteredUserController::class, 'index']) -> name('regist') -> middleware('guest');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/', function () {
-    $data = [
-        'title' => "Home",
-    ];
-
-    return view('user.home', $data);
-})->middleware('auth');
-
-Route::get('/menu', function () {
-    $data = [
-        'title' => "Menu",
-    ];
-
-    return view('user.menu', $data);
-})->name('menu')->middleware('auth');
-
-Route::get('/about', function () {
-    $data = [
-        'title' => "About Us",
-    ];
-
-    return view('user.about_us', $data);
-})->name('about')->middleware('auth');
-
-Route::get('/contact', function () {
-    $data = [
-        'title' => "Contact",
-    ];
-    
-    return view('user.contact', $data);
-})->name('contact')->middleware('auth');
+Route::get('/', [UserController::class, 'indexHome'])->middleware('auth');
+Route::get('/menu', [UserController::class, 'indexMenu'])->name('menu')->middleware('auth');
+Route::get('/about', [UserController::class, 'indexAbout'])->name('about')->middleware('auth');
+Route::get('/contact', [UserController::class, 'indexContact'])->name('contact')->middleware('auth');
+Route::post('/payment', [UserController::class, 'processPayment'])->middleware('auth');

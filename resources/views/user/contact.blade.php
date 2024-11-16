@@ -4,7 +4,7 @@
 <div class="bg-gray-100">
     <div class="flex flex-col items-center py-16" data-aos="fade-up">
         <p class="font-bold text-6xl text-brown mb-6">Contact Us</p>
-        <p class="w-1/3 text-center">At CakeScript, we understand the key ingredients that drive change. We're here to provide the components you need to create the perfect experience in the bakery industry.</p>
+        <p class="w-2/4 text-center">At CakeScript, we understand the key ingredients that drive change. We're here to provide the components you need to create the perfect experience in the bakery industry.</p>
     </div>
 
     <div class="px-28 py-16" data-aos="zoom-in">

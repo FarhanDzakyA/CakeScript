@@ -35,5 +35,8 @@
         @include('component.back_to_top')
         @include('component.footer')
     @endif
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    @yield('script')
 </body>
 </html>

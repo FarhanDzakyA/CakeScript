@@ -25,17 +25,48 @@
 
         <!-- Profile menu aligned to the end -->
         <div class="flex items-center space-x-5">
+            <!-- Cart Icon -->
             <div>
-                <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
+                <button type="button" onclick="toggleCartMenu()">
+                    <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
+                </button>
             </div>
 
-            <div class="flex items-center space-x-3 rtl:space-x-reverse relative">
+            <!-- Cart Menu -->
+            <div class="z-50 hidden absolute top-full right-0 backdrop-blur-md bg-gray-300/40 w-1/4 h-screen rounded-bl-lg p-4 text-black transform transition-transform duration-300 translate-x-full" id="cart-menu">
+                <div class="flex items-center gap-x-4 bg-white p-2 rounded-lg pe-4 mb-2">
+                    <img src="{{ asset('img/kue.jpg') }}" class="h-24 w-24 object-center object-cover rounded-lg" alt="">
+                    <div class="flex flex-col">
+                        <p class="text-lg font-semibold">Kosdnvsv</p>
+                        <p class="text-sm font-normal">IDR 30</p>
+                    </div>
+                    <a href="">
+                        <i class="fa-solid fa-trash-can text-red-500"></i>
+                    </a>
+                </div>
+                <div class="flex items-center gap-x-4 bg-white p-2 rounded-lg pe-4">
+                    <img src="{{ asset('img/kue.jpg') }}" class="h-24 rounded-lg" alt="">
+                    <div class="flex-grow">
+                        <p>Kosdnvsv</p>
+                        <p>IDR 30</p>
+                    </div>
+                    <i class="fa-solid fa-trash-can"></i>
+                </div>
+
+                <form action="{{ url('/payment') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="harga" value="30000">
+                    <button type="submit" id="pay-button">BELI</button>
+                </form>
+            </div>
+
+            <div class="flex items-center space-x-3 rtl:space-x-reverse">
                 <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                     <img class="w-8 h-8 rounded-full" src="{{ asset('img/ProfilePicture.png') }}" alt="user photo">
                 </button>
     
                 <!-- Dropdown Menu with absolute positioning -->
-                <div class="z-50 hidden my-4 text-base list-none bg-gray-50 divide-y divide-gray-300 rounded-lg shadow absolute top-full mt-2 right-0" id="user-dropdown">
+                <div class="z-50 hidden my-4 text-base list-none bg-gray-50 divide-y divide-gray-300 rounded-lg shadow absolute top-full mt-4 right-auto" id="user-dropdown">
                     <div class="px-4 py-3">
                         @if(auth()->check())
                             <span class="block text-sm text-gray-900 truncate">{{ auth()->user()->nama_pelanggan }}</span>

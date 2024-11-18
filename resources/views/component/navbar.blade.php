@@ -69,7 +69,7 @@
                 <div class="z-50 hidden my-4 text-base list-none bg-gray-50 divide-y divide-gray-300 rounded-lg shadow absolute top-full mt-4 right-auto" id="user-dropdown">
                     <div class="px-4 py-3">
                         @if(auth()->check())
-                            <span class="block text-sm text-gray-900 truncate">{{ auth()->user()->nama_pelanggan }}</span>
+                            <span class="block text-sm text-gray-900 truncate">{{ auth()->user()->nama }}</span>
                         @else
                             <span class="block text-sm text-gray-900 truncate"></span>
                         @endif

@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\AdminMenuController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +30,11 @@ Route::get('/menu', [UserController::class, 'indexMenu'])->name('menu')->middlew
 Route::get('/about', [UserController::class, 'indexAbout'])->name('about')->middleware('auth');
 Route::get('/contact', [UserController::class, 'indexContact'])->name('contact')->middleware('auth');
 Route::post('/payment', [UserController::class, 'processPayment'])->middleware('auth');
+
+Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
+Route::get('admin/menu', [AdminMenuController::class, 'index'])->name('admin.menu')->middleware('auth');
+Route::get('admin/menu/add', [AdminMenuController::class, 'create'])->middleware('auth');
+Route::post('admin/menu/store', [AdminMenuController::class, 'store'])->name('admin.menu-store')->middleware('auth');
+Route::get('admin/menu/{id_menu}/edit', [AdminMenuController::class, 'edit'])->name('admin.edit')->middleware('auth');
+Route::put('admin/menu/{id_menu}', [AdminMenuController::class, 'update'])->name('admin.update')->middleware('auth');
+Route::delete('admin/menu/{id_menu}', [AdminMenuController::class, 'destroy'])->name('admin.destroy')->middleware('auth');

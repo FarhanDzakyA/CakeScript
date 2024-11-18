@@ -27,7 +27,7 @@ class UserController extends Controller
             'title' => "About Us",
         ];
     
-        return view('user.about_us', $data);
+        return view('user.about-us', $data);
     }
 
     public function indexContact() {

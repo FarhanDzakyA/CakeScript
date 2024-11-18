@@ -16,7 +16,7 @@ class RegisteredUserController extends Controller
 
     public function store(Request $request) {
         $validatedData = $request->validate([
-            'nama_pelanggan' => 'required|max:255',
+            'nama' => 'required|max:255',
             'alamat' => 'required',
             'no_hp' => 'required|max:14',
             'password' => 'required|confirmed|min:6|max:50',

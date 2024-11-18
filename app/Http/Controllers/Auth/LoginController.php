@@ -16,7 +16,7 @@ class LoginController extends Controller
 
     public function authenticate(Request $request) {
         $credentials = $request->validate([
-            'nama_pelanggan' => 'required',
+            'nama' => 'required',
             'password' => 'required',
         ]);
 
@@ -25,9 +25,9 @@ class LoginController extends Controller
 
             $role = Auth::user()->role;
 
-            if($role === "User") {
+            if($role === 'User') {
                 return redirect()->intended('/');
-            } elseif($role === "Admin") {
+            } elseif($role === 'Admin') {
                 return redirect()->intended('/dashboard');
             }
         }

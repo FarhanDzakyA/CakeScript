@@ -34,7 +34,7 @@ class CategorySeeder extends Seeder
             ],
             [
                 'id_category' => 4,
-                'category_name' => 'Pastry and Denish',
+                'category_name' => 'Pastry and Danish',
                 'created_at' => now(),
                 'updated_at' => now()
             ]

@@ -12,7 +12,8 @@
                 extend: {
                     colors: {
                         leaf: '#105341',
-                        brown: '#532610'
+                        brown: '#532610',
+                        brightleaf: '#16755b'
                     },
                 },
             },

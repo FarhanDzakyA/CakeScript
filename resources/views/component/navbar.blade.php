@@ -20,6 +20,9 @@
                 <li>
                     <a href="{{ route('contact') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('contact') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}">Contact</a>
                 </li>
+                <li>
+                    <a href="{{ route('orders') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('orders') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}">Order</a>
+                </li>
             </ul>
         </div>
 
@@ -27,37 +30,9 @@
         <div class="flex items-center space-x-5">
             <!-- Cart Icon -->
             <div>
-                <button type="button" onclick="toggleCartMenu()">
+                <a href="{{ route('cart') }}">
                     <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-                </button>
-            </div>
-
-            <!-- Cart Menu -->
-            <div class="z-50 hidden absolute top-full right-0 backdrop-blur-md bg-gray-300/40 w-1/4 h-screen rounded-bl-lg p-4 text-black transform transition-transform duration-300 translate-x-full" id="cart-menu">
-                <div class="flex items-center gap-x-4 bg-white p-2 rounded-lg pe-4 mb-2">
-                    <img src="{{ asset('img/kue.jpg') }}" class="h-24 w-24 object-center object-cover rounded-lg" alt="">
-                    <div class="flex flex-col">
-                        <p class="text-lg font-semibold">Kosdnvsv</p>
-                        <p class="text-sm font-normal">IDR 30</p>
-                    </div>
-                    <a href="">
-                        <i class="fa-solid fa-trash-can text-red-500"></i>
-                    </a>
-                </div>
-                <div class="flex items-center gap-x-4 bg-white p-2 rounded-lg pe-4">
-                    <img src="{{ asset('img/kue.jpg') }}" class="h-24 rounded-lg" alt="">
-                    <div class="flex-grow">
-                        <p>Kosdnvsv</p>
-                        <p>IDR 30</p>
-                    </div>
-                    <i class="fa-solid fa-trash-can"></i>
-                </div>
-
-                <form action="{{ url('/payment') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="harga" value="30000">
-                    <button type="submit" id="pay-button">BELI</button>
-                </form>
+                </a>
             </div>
 
             <div class="flex items-center space-x-3 rtl:space-x-reverse">

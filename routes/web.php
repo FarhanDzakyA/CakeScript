@@ -29,7 +29,10 @@ Route::get('/', [UserController::class, 'indexHome'])->middleware('auth');
 Route::get('/menu', [UserController::class, 'indexMenu'])->name('menu')->middleware('auth');
 Route::get('/about', [UserController::class, 'indexAbout'])->name('about')->middleware('auth');
 Route::get('/contact', [UserController::class, 'indexContact'])->name('contact')->middleware('auth');
-Route::post('/payment', [UserController::class, 'processPayment'])->middleware('auth');
+Route::get('/shopping-cart', [UserController::class, 'indexCart'])->name('cart');
+Route::post('/checkout', [UserController::class, 'checkoutProcess'])->name('checkout');
+Route::get('/orders', [UserController::class, 'indexOrder'])->name('orders');
+Route::get('/order/{id}', [UserController::class, 'paymentSuccess'])->name('payment.success');
 
 Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
 Route::get('admin/menu', [AdminMenuController::class, 'index'])->name('admin.menu')->middleware('auth');

@@ -1,5 +1,5 @@
-<div class="w-64 bg-gray-800 text-white fixed top-0 bottom-0 flex flex-col">
-    <div class="bg-gray-700 p-6 text-center text-xl font-bold">
+<div class="w-64 bg-leaf text-white fixed top-0 bottom-0 flex flex-col">
+    <div class="bg-brightleaf p-6 text-center text-xl font-bold">
         Admin Panel
     </div>
     <nav class="flex-grow">

@@ -7,6 +7,7 @@
 
     <script src="{{ asset('js/userapp.js') }}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         tailwind.config = {
@@ -14,7 +15,11 @@
                 extend: {
                     colors: {
                         leaf: '#105341',
+                        darkleaf: '#0b3e30',
                         brown: '#532610'
+                    },
+                    height: {
+                        'custome': '352px'
                     },
                 },
             },

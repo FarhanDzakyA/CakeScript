@@ -33,6 +33,7 @@ Route::get('/shopping-cart', [UserController::class, 'indexCart'])->name('cart')
 Route::post('/checkout', [UserController::class, 'checkoutProcess'])->name('checkout');
 Route::get('/orders', [UserController::class, 'indexOrder'])->name('orders');
 Route::get('/order/{id}', [UserController::class, 'paymentSuccess'])->name('payment.success');
+Route::delete('/order/{id}', [UserController::class, 'cancelOrder'])->name('cancel.order');
 
 Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
 Route::get('admin/menu', [AdminMenuController::class, 'index'])->name('admin.menu')->middleware('auth');

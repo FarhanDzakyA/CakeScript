@@ -11,16 +11,18 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function indexHome() {
-        $data = [
-            'title' => "Home",
-        ];
+        $title = 'Home';
+        $top_product = Menu::withSum('orderDetails as total_quantity_sold', 'quantity')
+            ->orderBy('total_quantity_sold', 'desc')
+            ->take(5)
+            ->get();
     
-        return view('user.home', $data);
+        return view('user.home', compact('title', 'top_product'));
     }
 
     public function indexMenu() {
         $title = 'Menu';
-        $all_menu = Menu::orderBy('menu_name', 'asc')->paginate(20);
+        $all_menu = Menu::orderBy('menu_name', 'asc')->get();
         $bread_menu = Menu::where('id_category', 1)->orderBy('menu_name', 'asc')->get();
         $cake_menu = Menu::where('id_category', 2)->orderBy('menu_name', 'asc')->get();
         $donuts_menu = Menu::where('id_category', 3)->orderBy('menu_name', 'asc')->get();
@@ -53,7 +55,11 @@ class UserController extends Controller
 
     public function indexOrder() {
         $title = 'Order History';
-        $orders = Orders::with(['details.menu'])->where('id_user', Auth::id())->get();
+        $orders = Orders::with(['details.menu'])
+            ->where('id_user', Auth::id())
+            ->orderByRaw("CASE WHEN `status` = 'pending' THEN 1 ELSE 2 END")
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('user.order', compact('title', 'orders'));
     }
@@ -120,5 +126,12 @@ class UserController extends Controller
         $order->save();
 
         return redirect()->route('orders')->with('payment-success', 'Pesanan Berhasil Dibayar');
+    }
+    
+    public function cancelOrder($id) {
+        $order = Orders::findOrFail($id);
+        $order->delete();
+
+        return redirect()->route('orders')->with('cancel-success', 'Pesanan Berhasil Dibatalkan');
     }
 }

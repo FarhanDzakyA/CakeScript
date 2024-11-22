@@ -33,17 +33,17 @@
                 @forelse($all_menu as $menu)
                     <div class="flex flex-col bg-white rounded-lg shadow-lg">
                         <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Menu Photo" class="w-full object-cover object-center rounded-t-lg">
-                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
+                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 rounded-b-lg">
                             <h3 class="text-xl text-center font-bold mb-2">{{ $menu->menu_name }}</h3>
                             <p class="grow text-gray-700 text-center mb-4 h-24">{{ $menu->menu_description }}</p>
                             <div class="flex justify-between items-center w-full">
                                 <p class="text-gray-900 font-semibold">Price: Rp {{ number_format($menu->menu_price, 0, ',', '.') }}</p>
-                                <button type="button" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg add-to-cart"
+                                <button type="button" class="px-8 py-2 bg-leaf text-white font-semibold rounded-lg hover:bg-darkleaf add-to-cart"
                                     data-id="{{ $menu->id_menu }}"
                                     data-name="{{ $menu->menu_name }}"
                                     data-price="{{ $menu->menu_price }}"
                                     data-image="{{ asset('storage/uploads/' . $menu->photo_url) }}">
-                                    + Cart
+                                        <i class="fa-solid fa-cart-plus"></i>
                                 </button>
                             </div>
                         </div>
@@ -51,19 +51,22 @@
                 @empty
                     <p class="col-span-4 mt-4 text-center text-brown font-semibold text-5xl">Mohon Maaf Menu Belum Tersedia</p>
                 @endforelse
-                {{ $all_menu->links() }}
             </div>
             <div class="hidden grid grid-cols-4 gap-6" id="breads" role="tabpanel" aria-labelledby="breads-tab">
                 @forelse($bread_menu as $menu)
                     <div class="flex flex-col bg-white rounded-lg shadow-lg">
                         <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Menu Photo" class="w-full object-cover object-center rounded-t-lg">
-                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
+                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 rounded-b-lg">
                             <h3 class="text-xl text-center font-bold mb-2">{{ $menu->menu_name }}</h3>
                             <p class="grow text-gray-700 text-center mb-4 h-24">{{ $menu->menu_description }}</p>
                             <div class="flex justify-between items-center w-full">
                                 <p class="text-gray-900 font-semibold">Price: Rp {{ number_format($menu->menu_price, 0, ',', '.') }}</p>
-                                <button class="px-8 py-2 bg-leaf text-white font-semibold rounded-lg">
-                                    <i class="fa-solid fa-cart-plus"></i>
+                                <button type="button" class="px-8 py-2 bg-leaf text-white font-semibold rounded-lg hover:bg-darkleaf add-to-cart"
+                                    data-id="{{ $menu->id_menu }}"
+                                    data-name="{{ $menu->menu_name }}"
+                                    data-price="{{ $menu->menu_price }}"
+                                    data-image="{{ asset('storage/uploads/' . $menu->photo_url) }}">
+                                        <i class="fa-solid fa-cart-plus"></i>
                                 </button>
                             </div>
                         </div>
@@ -76,13 +79,17 @@
                 @forelse($cake_menu as $menu)
                     <div class="flex flex-col bg-white rounded-lg shadow-lg">
                         <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Menu Photo" class="w-full object-cover object-center rounded-t-lg">
-                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
+                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 rounded-b-lg">
                             <h3 class="text-xl text-center font-bold mb-2">{{ $menu->menu_name }}</h3>
                             <p class="grow text-gray-700 text-center mb-4 h-24">{{ $menu->menu_description }}</p>
                             <div class="flex justify-between items-center w-full">
                                 <p class="text-gray-900 font-semibold">Price: Rp {{ number_format($menu->menu_price, 0, ',', '.') }}</p>
-                                <button class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg">
-                                    + Cart
+                                <button type="button" class="px-8 py-2 bg-leaf text-white font-semibold rounded-lg hover:bg-darkleaf add-to-cart"
+                                    data-id="{{ $menu->id_menu }}"
+                                    data-name="{{ $menu->menu_name }}"
+                                    data-price="{{ $menu->menu_price }}"
+                                    data-image="{{ asset('storage/uploads/' . $menu->photo_url) }}">
+                                        <i class="fa-solid fa-cart-plus"></i>
                                 </button>
                             </div>
                         </div>
@@ -95,13 +102,17 @@
                 @forelse($donuts_menu as $menu)
                     <div class="flex flex-col bg-white rounded-lg shadow-lg">
                         <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Menu Photo" class="w-full object-cover object-center rounded-t-lg">
-                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
+                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 rounded-b-lg">
                             <h3 class="text-xl text-center font-bold mb-2">{{ $menu->menu_name }}</h3>
                             <p class="grow text-gray-700 text-center mb-4 h-24">{{ $menu->menu_description }}</p>
                             <div class="flex justify-between items-center w-full">
                                 <p class="text-gray-900 font-semibold">Price: Rp {{ number_format($menu->menu_price, 0, ',', '.') }}</p>
-                                <button class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg">
-                                    + Cart
+                                <button type="button" class="px-8 py-2 bg-leaf text-white font-semibold rounded-lg hover:bg-darkleaf add-to-cart"
+                                    data-id="{{ $menu->id_menu }}"
+                                    data-name="{{ $menu->menu_name }}"
+                                    data-price="{{ $menu->menu_price }}"
+                                    data-image="{{ asset('storage/uploads/' . $menu->photo_url) }}">
+                                        <i class="fa-solid fa-cart-plus"></i>
                                 </button>
                             </div>
                         </div>
@@ -114,13 +125,17 @@
                 @forelse($pastry_menu as $menu)
                     <div class="flex flex-col bg-white rounded-lg shadow-lg">
                         <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Menu Photo" class="w-full object-cover object-center rounded-t-lg">
-                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
+                        <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 rounded-b-lg">
                             <h3 class="text-xl text-center font-bold mb-2">{{ $menu->menu_name }}</h3>
                             <p class="grow text-gray-700 text-center mb-4 h-24">{{ $menu->menu_description }}</p>
                             <div class="flex justify-between items-center w-full">
                                 <p class="text-gray-900 font-semibold">Price: Rp {{ number_format($menu->menu_price, 0, ',', '.') }}</p>
-                                <button class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg">
-                                    + Cart
+                                <button type="button" class="px-8 py-2 bg-leaf text-white font-semibold rounded-lg hover:bg-darkleaf add-to-cart"
+                                    data-id="{{ $menu->id_menu }}"
+                                    data-name="{{ $menu->menu_name }}"
+                                    data-price="{{ $menu->menu_price }}"
+                                    data-image="{{ asset('storage/uploads/' . $menu->photo_url) }}">
+                                        <i class="fa-solid fa-cart-plus"></i>
                                 </button>
                             </div>
                         </div>

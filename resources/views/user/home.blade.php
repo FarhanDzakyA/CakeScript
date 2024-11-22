@@ -8,7 +8,7 @@
             <div class="flex flex-col h-full justify-center items-start">
                 <p class="mb-6 text-brown font-sans text-5xl font-bold">Celebrate Life's Sweet Moments With The Perfect Cake</p>
                 <p class="mb-10 text-black font-sans text-base">Boost your productivity and elevate your mood with a delightful treat from our bakery. Whether it's a rich slice of cake or a scrumptious pastry, take a moment to enjoy the most comforting flavors. Because every sweet bite is a step toward a happier day!</p>
-                <a href="{{ route('menu') }}" class="p-3 bg-leaf w-36 text-center text-white rounded-md">SHOP NOW</a>
+                <a href="{{ route('menu') }}" class="p-3 bg-leaf w-36 text-center text-white rounded-md hover:bg-darkleaf">SHOP NOW</a>
             </div>
         </div>
     
@@ -101,47 +101,17 @@
         <h1 class="mb-12 text-center text-5xl font-sans font-bold text-brown" data-aos="fade-up">Our Top Product</h1>
 
         <div class="px-16 w-full">
-            <div class="flex justify-between gap gap-x-10" data-aos="fade-up">
-                <!-- Bread Category -->
-                <div class="flex flex-col bg-white rounded-lg shadow-lg w-1/4">
-                    <img src="{{ asset('img/kue.jpg') }}" alt="Bread Icon" class="w-full h-52 rounded-t-lg">
-                    <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
-                        <h3 class="text-xl text-center font-bold mb-2">Breads</h3>
-                        <p class="text-gray-700 text-center mb-4">Freshly baked with quality ingredients, these treats are soft, flavorful, and perfect for any meal or snack.</p>
-                        <p class="text-gray-900 font-semibold mb-4">Price: $10.99</p>
-                    </div>
-                </div>
-                <!-- End of Bread Category -->
-                <!-- Bread Category -->
-                <div class="flex flex-col bg-white rounded-lg shadow-lg w-1/4">
-                    <img src="{{ asset('img/kue.jpg') }}" alt="Bread Icon" class="w-full h-52 rounded-t-lg">
-                    <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
-                        <h3 class="text-xl text-center font-bold mb-2">Breads</h3>
-                        <p class="text-gray-700 text-center mb-4">Freshly baked with quality ingredients, these treats are soft, flavorful, and perfect for any meal or snack.</p>
-                        <p class="text-gray-900 font-semibold mb-4">Price: $10.99</p>
-                    </div>
-                </div>
-                <!-- End of Bread Category -->
-                <!-- Bread Category -->
-                <div class="flex flex-col bg-white rounded-lg shadow-lg w-1/4">
-                    <img src="{{ asset('img/kue.jpg') }}" alt="Bread Icon" class="w-full h-52 rounded-t-lg">
-                    <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
-                        <h3 class="text-xl text-center font-bold mb-2">Breads</h3>
-                        <p class="text-gray-700 text-center mb-4">Freshly baked with quality ingredients, these treats are soft, flavorful, and perfect for any meal or snack.</p>
-                        <p class="text-gray-900 font-semibold mb-4">Price: $10.99</p>
-                    </div>
-                </div>
-                <!-- End of Bread Category -->
-                <!-- Bread Category -->
-                <div class="flex flex-col bg-white rounded-lg shadow-lg w-1/4">
-                    <img src="{{ asset('img/kue.jpg') }}" alt="Bread Icon" class="w-full h-52 rounded-t-lg">
-                    <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 border-x border-b border-gray-300 rounded-b-lg">
-                        <h3 class="text-xl text-center font-bold mb-2">Breads</h3>
-                        <p class="text-gray-700 text-center mb-4">Freshly baked with quality ingredients, these treats are soft, flavorful, and perfect for any meal or snack.</p>
-                        <p class="text-gray-900 font-semibold mb-4">Price: $10.99</p>
-                    </div>
-                </div>
-                <!-- End of Bread Category -->
+            <div class="grid grid-cols-5 gap gap-x-10" data-aos="fade-up">
+                @foreach($top_product as $menu)
+                    <div class="flex flex-col bg-white rounded-lg shadow-lg">
+                            <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Menu Photo" class="w-full object-cover object-center rounded-t-lg">
+                            <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 rounded-b-lg">
+                                <h3 class="text-xl text-center font-bold mb-2">{{ $menu->menu_name }}</h3>
+                                <p class="grow text-gray-700 text-center mb-4">{{ $menu->menu_description }}</p>
+                                <p class="text-gray-900 font-semibold ">Price: Rp {{ number_format($menu->menu_price, 0, ',', '.') }}</p>
+                            </div>
+                        </div>
+                @endforeach
             </div>
         </div>
     </div>

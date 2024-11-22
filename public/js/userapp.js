@@ -48,6 +48,20 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    function updateCartBadge() {
+        const cartData = JSON.parse(sessionStorage.getItem('cart')) || [];
+        const totalItems = cartData.reduce((sum, item) => sum + item.quantity, 0);
+        const cartBadge = document.getElementById('cart-badge');
+    
+        if (totalItems > 0) {
+            cartBadge.textContent = totalItems; // Perbarui jumlah item
+            cartBadge.classList.remove('hidden'); // Tampilkan badge
+        } else {
+            cartBadge.classList.add('hidden'); // Sembunyikan badge jika tidak ada item
+        }
+    }
+
+    // Add the menu into the cart list
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', () => {
             const menuItem = {
@@ -71,9 +85,28 @@ document.addEventListener("DOMContentLoaded", function() {
     
             // Simpan data keranjang ke session storage
             sessionStorage.setItem('cart', JSON.stringify(cartData));
-    
-            // Log isi cart ke console (opsional)
-            console.log('Current Cart:', cartData);
+
+            // Show notification when add a menu to cart
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "500",
+                "hideDuration": "1000",
+                "timeOut": "2500",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+              };
+              toastr.success('Menu berhasil ditambahkan!', 'Success');
+
+              updateCartBadge();
         });
     });     
 
@@ -141,15 +174,18 @@ document.addEventListener("DOMContentLoaded", function() {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
                 removeFromCart(button.dataset.id);
+                updateCartBadge();
             });
         });
     
         cartList.querySelectorAll('.increase-quantity').forEach(button => {
             button.addEventListener('click', () => changeQuantity(button.dataset.id, 1));
+            updateCartBadge();
         });
     
         cartList.querySelectorAll('.decrease-quantity').forEach(button => {
             button.addEventListener('click', () => changeQuantity(button.dataset.id, -1));
+            updateCartBadge();
         });
     }    
 
@@ -169,6 +205,7 @@ document.addEventListener("DOMContentLoaded", function() {
             item.quantity += amount;
             if (item.quantity <= 0) {
                 removeFromCart(id);
+                updateCartBadge();
             } else {
                 sessionStorage.setItem('cart', JSON.stringify(cartData));
                 loadCartFromStorage();
@@ -200,5 +237,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Muat data keranjang saat halaman dimuat
+    updateCartBadge();
     loadCartFromStorage();
 });

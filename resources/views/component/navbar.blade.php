@@ -29,26 +29,23 @@
         <!-- Profile menu aligned to the end -->
         <div class="flex items-center space-x-5">
             <!-- Cart Icon -->
-            <div>
+            <div class="relative">
                 <a href="{{ route('cart') }}">
-                    <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
+                    <i class="fa-solid fa-cart-shopping text-white hover:text-cyan-500"></i>
+                    <span id="cart-badge" class="absolute -top-1.5 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full hidden">
+                        0
+                    </span>
                 </a>
             </div>
 
             <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                    <img class="w-8 h-8 rounded-full" src="{{ asset('img/ProfilePicture.png') }}" alt="user photo">
+                <button type="button" class="flex items-center gap-x-2 text-white bg-transparent hover:text-cyan-500" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                        <span class="max-w-40 truncate">{{ auth()->user()->nama }}</span>
+                        <i class="fa-solid fa-chevron-down"></i>
                 </button>
     
                 <!-- Dropdown Menu with absolute positioning -->
-                <div class="z-50 hidden my-4 text-base list-none bg-gray-50 divide-y divide-gray-300 rounded-lg shadow absolute top-full mt-4 right-auto" id="user-dropdown">
-                    <div class="px-4 py-3">
-                        @if(auth()->check())
-                            <span class="block text-sm text-gray-900 truncate">{{ auth()->user()->nama }}</span>
-                        @else
-                            <span class="block text-sm text-gray-900 truncate"></span>
-                        @endif
-                    </div>
+                <div class="z-50 hidden w-36 my-4 text-base list-none bg-gray-50 divide-y divide-gray-300 rounded-lg shadow" id="user-dropdown">
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Profile</a>

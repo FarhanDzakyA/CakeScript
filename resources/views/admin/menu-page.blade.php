@@ -1,65 +1,71 @@
 @extends('layouts.admin-app')
 
+@section('breadcrumbs')
+<span class="text-xl font-bold text-black">Menu</span>
+@endsection
+
+@php
+    $startingNumber = ($menus->currentPage() - 1) * $menus->perPage();
+@endphp
+
 @section('content')
-<div class="container mx-auto mt-10">
-    <div class="max-w-4xl mx-auto">
-        <h3 class="text-2xl font-bold text-center mb-6">Data Menu</h3>
-        <hr class="mb-4">
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <a href="{{ url('admin/menu/add') }}" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded mb-4 inline-flex items-center">
+<div class="py-2 px-4">
+    <h3 class="text-3xl font-bold text-center text-brown mb-6">Data Menu</h3>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex justify-end">
+            <a href="{{ route('admin.menu-add') }}" class="bg-leaf hover:bg-darkleaf text-white font-semibold py-2 px-4 rounded-md mb-4 inline-flex items-center">
                 <i class="fas fa-plus mr-2"></i> TAMBAH MENU
-            </a>
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white">
-                    <thead>
-                        <tr class="text-center bg-gray-100">
-                            <th class="py-3 px-4 border">GAMBAR</th>
-                            <th class="py-3 px-4 border">NAMA</th>
-                            <th class="py-3 px-4 border">DESKRIPSI</th>
-                            <th class="py-3 px-4 border">HARGA</th>
-                            <th class="py-3 px-4 border">STOK</th>
-                            <th class="py-3 px-4 border">KATEGORI</th>
-                            <th class="py-3 px-4 border">AKSI</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($menus as $menu)
-                            <tr class="text-center">
-                                <td class="py-3 px-4 border">
-                                    <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Gambar Menu" class="w-20 h-auto mx-auto rounded">
-                                </td>
-                                <td class="py-3 px-4 border">{{ $menu->menu_name }}</td>
-                                <td class="py-3 px-4 border">{{ $menu->menu_description }}</td>
-                                <td class="py-3 px-4 border">{{ number_format($menu->menu_price, 2) }}</td>
-                                <td class="py-3 px-4 border">{{ $menu->stok }}</td>
-                                <td class="py-3 px-4 border">{{ $menu->id_category }}</td>
-                                <td class="py-3 px-4 border">
-                                    <a href="" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
-                                        <i class="fas fa-receipt mr-1"></i> SHOW
+            </a>    
+        </div>
+        <div>
+            <table class="table-fixed overflow-x-auto w-full mb-4">
+                <thead>
+                    <tr class="bg-leaf text-white">
+                        <th class="py-3 px-4 rounded-tl-md w-16">No</th>
+                        <th class="py-3 px-4 text-start w-1/6">Nama</th>
+                        <th class="py-3 px-4 text-start w-[30%]">Deskripsi</th>
+                        <th class="py-3 px-4 w-28">Harga</th>
+                        <th class="py-3 px-4 w-28">Kategori</th>
+                        <th class="py-3 px-4 w-28">Gambar</th>
+                        <th class="py-3 px-4 rounded-tr-md w-32">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($menus as $menu)
+                        <tr class="odd:bg-gray-50 even:bg-gray-200">
+                            <td class="py-3 px-4 text-center">{{ $startingNumber + $loop->iteration }}</td>
+                            <td class="py-3 px-4 text-start">{{ $menu->menu_name }}</td>
+                            <td class="py-3 px-4 text-justify">{{ $menu->menu_description }}</td>
+                            <td class="py-3 px-4 text-center">Rp {{ number_format($menu->menu_price, 0 , ',', '.') }}</td>
+                            <td class="py-3 px-4 text-center">{{ $menu->category->category_name }}</td>
+                            <td class="py-3 px-4">
+                                <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Gambar Menu" class="w-20 h-auto mx-auto rounded">
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="flex justify-center items-center gap-x-2">
+                                    <a href="{{ route('admin.menu-edit', $menu->id_menu) }}" class="w-8 h-8 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full">
+                                        <i class="fa-solid fa-pen"></i>
                                     </a>
-                                    <a href="{{ route('admin.edit', $menu->id_menu) }}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
-                                        <i class="fas fa-edit mr-1"></i> EDIT
-                                    </a>
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('admin.destroy', $menu->id_menu) }}" method="POST" class="inline-flex space-x-2">
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('admin.menu-destroy', $menu->id_menu) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded inline-flex items-center">
-                                            <i class="fas fa-trash mr-1"></i> HAPUS
+                                        <button type="submit" class="w-8 h-8 flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-full">
+                                            <i class="fa-solid fa-trash-can"></i>
                                         </button>
                                     </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="text-center py-4 text-red-600 font-semibold">
-                                    Data Menu belum tersedia.
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-                {{ $menus->links() }}
-            </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-red-600 font-semibold">
+                                Data Menu belum tersedia.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            {{ $menus->onEachSide(1)->links('vendor.pagination.tailwind') }}
         </div>
     </div>
 </div>

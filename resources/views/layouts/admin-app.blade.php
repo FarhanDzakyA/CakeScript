@@ -12,8 +12,9 @@
                 extend: {
                     colors: {
                         leaf: '#105341',
-                        brown: '#532610',
-                        brightleaf: '#16755b'
+                        darkleaf: '#0b3e30',
+                        brightleaf: '#16755b',
+                        brown: '#532610'
                     },
                 },
             },
@@ -28,8 +29,8 @@
 
         <!-- Main Content -->
         <div class="flex-grow ml-64">
-            <nav class="bg-white shadow p-4">
-                <span class="text-xl font-semibold text-black">{{ $title }}</span>
+            <nav class="flex items-center gap-x-2 bg-white shadow p-4">
+                @yield('breadcrumbs')
             </nav>
 
             <div class="p-6">
@@ -37,5 +38,7 @@
             </div>
         </div>
     </div>
+
+    @yield('script')
 </body>
 </html>

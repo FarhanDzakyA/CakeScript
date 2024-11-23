@@ -12,7 +12,7 @@
             <img src="{{ asset('img/Brand Logo.png') }}" alt="" class="h-12 mb-6">
             <p class="mb-4 text-4xl font-sans font-bold">Create your Account</p>
 
-            <form action="{{ url('/register') }}" method="post" class="w-full mb-6">
+            <form action="{{ route('regist.store') }}" method="post" class="w-full mb-6">
                 @csrf
 
                 <div class="mb-3">
@@ -90,7 +90,7 @@
 
                 <div>
                     <button type="submit" class="w-full p-2.5 bg-leaf font-sans font-bold text-base text-white rounded-xl">
-                        Sign In
+                        Sign Up
                     </button>
                 </div>
             </form>

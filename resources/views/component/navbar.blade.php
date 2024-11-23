@@ -1,7 +1,7 @@
 <nav class="bg-leaf border-gray-200 relative">
     <div class="max-w-screen flex items-center justify-between mx-4 p-4">    
         <!-- Logo aligned to the start -->
-        <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('img/BrandIcon.png') }}" class="h-8 bg-white" alt="Brand Icon">
         </a>
 
@@ -9,7 +9,7 @@
         <div class="absolute left-1/2 transform -translate-x-1/2" id="navbar-user">
             <ul class="flex space-x-8 font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-leaf rtl:space-x-reverse md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-leaf md:dark:bg-leaf dark:border-gray-700">
                 <li>
-                    <a href="{{ url('/') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('/') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}" aria-current="page">Home</a>
+                    <a href="{{ route('home') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('/') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}" aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="{{ route('menu') }}" class="block p-0 text-white bg-leaf rounded hover:underline hover:underline-offset-4 hover:decoration-cyan-500 hover:decoration-2 {{ Request::is('menu') ? 'underline underline-offset-4 decoration-cyan-500 decoration-2' : '' }}">Menu</a>
@@ -51,7 +51,7 @@
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Profile</a>
                         </li>
                         <li>
-                            <form action="{{ url('/logout') }}" method="POST">
+                            <form action="{{ route('logout.user') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="block px-4 py-2 w-full text-sm text-start text-gray-700 hover:bg-gray-300">Sign Out</button>
                             </form>

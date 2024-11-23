@@ -26,9 +26,9 @@ class LoginController extends Controller
             $role = Auth::user()->role;
 
             if($role === 'User') {
-                return redirect()->intended('/');
+                return redirect()->route('home');
             } elseif($role === 'Admin') {
-                return redirect()->intended('/admin/dashboard');
+                return redirect()->route('admin.dashboard');
             }
         }
 
@@ -43,6 +43,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

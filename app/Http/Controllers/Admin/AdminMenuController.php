@@ -14,7 +14,7 @@ class AdminMenuController extends Controller
 {
     public function index() {
         $title = 'Menu';
-        $menus = Menu::paginate(10);
+        $menus = Menu::with('category')->paginate(10);
 
         return view('admin.menu-page', compact('menus', 'title'));
     }

@@ -13,7 +13,7 @@
             <p class="mb-4 text-4xl font-sans font-bold">Sign In to your Account</p>
             <p class="text-lg font-sans font-normal mb-6">Ready to treat yourself? Sign in to explore <br> delicious cakes made just for you.</p>
 
-            <form action="{{ url('/login') }}" method="POST" class="w-full mb-6">
+            <form action="{{ route('login.process') }}" method="POST" class="w-full mb-6">
                 @csrf
 
                 <div class="mb-3">

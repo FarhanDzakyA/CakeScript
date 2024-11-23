@@ -15,4 +15,8 @@ class Category extends Model
     protected $fillable = [
         'category_name'
     ];
+
+    public function menu() {
+        return $this->hasMany(Menu::class, 'id_category', 'id_category');
+    }
 }

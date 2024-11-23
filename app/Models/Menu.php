@@ -29,5 +29,9 @@ class Menu extends Model
 
     public function orderDetails() {
         return $this->hasMany(OrderDetail::class, 'id_product', 'id_menu');
-    } 
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class, 'id_category', 'id_category');
+    }
 }

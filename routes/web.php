@@ -18,27 +18,36 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 |
 */
 
-Route::get('/login', [LoginController::class, 'index']) -> name('login') -> middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+// Route untuk user yang belum terautentikasi
+Route::middleware(['guest'])->group(function() {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.process');
+    Route::get('/register', [RegisteredUserController::class, 'index'])->name('regist');
+    Route::post('/register', [RegisteredUserController::class, 'store'])->name('regist.store');
+});
 
-Route::get('/register', [RegisteredUserController::class, 'index']) -> name('regist') -> middleware('guest');
-Route::post('/register', [RegisteredUserController::class, 'store']);
+// Route untuk user dengan Role 'User' yang telah terautentikasi
+Route::middleware(['auth', 'rolecheck:User'])->group(function() {
+    Route::get('/', [UserController::class, 'indexHome'])->name('home');
+    Route::get('/menu', [UserController::class, 'indexMenu'])->name('menu');
+    Route::get('/about', [UserController::class, 'indexAbout'])->name('about');
+    Route::get('/contact', [UserController::class, 'indexContact'])->name('contact');
+    Route::get('/shopping-cart', [UserController::class, 'indexCart'])->name('cart');
+    Route::post('/checkout', [UserController::class, 'checkoutProcess'])->name('checkout');
+    Route::get('/orders', [UserController::class, 'indexOrder'])->name('orders');
+    Route::get('/order/{id}', [UserController::class, 'paymentSuccess'])->name('payment.success');
+    Route::delete('/order/{id}', [UserController::class, 'cancelOrder'])->name('cancel.order');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout.user');
+});
 
-Route::get('/', [UserController::class, 'indexHome'])->middleware('auth');
-Route::get('/menu', [UserController::class, 'indexMenu'])->name('menu')->middleware('auth');
-Route::get('/about', [UserController::class, 'indexAbout'])->name('about')->middleware('auth');
-Route::get('/contact', [UserController::class, 'indexContact'])->name('contact')->middleware('auth');
-Route::get('/shopping-cart', [UserController::class, 'indexCart'])->name('cart');
-Route::post('/checkout', [UserController::class, 'checkoutProcess'])->name('checkout');
-Route::get('/orders', [UserController::class, 'indexOrder'])->name('orders');
-Route::get('/order/{id}', [UserController::class, 'paymentSuccess'])->name('payment.success');
-Route::delete('/order/{id}', [UserController::class, 'cancelOrder'])->name('cancel.order');
-
-Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->middleware('auth');
-Route::get('admin/menu', [AdminMenuController::class, 'index'])->name('admin.menu')->middleware('auth');
-Route::get('admin/menu/add', [AdminMenuController::class, 'create'])->middleware('auth');
-Route::post('admin/menu/store', [AdminMenuController::class, 'store'])->name('admin.menu-store')->middleware('auth');
-Route::get('admin/menu/{id_menu}/edit', [AdminMenuController::class, 'edit'])->name('admin.edit')->middleware('auth');
-Route::put('admin/menu/{id_menu}', [AdminMenuController::class, 'update'])->name('admin.update')->middleware('auth');
-Route::delete('admin/menu/{id_menu}', [AdminMenuController::class, 'destroy'])->name('admin.destroy')->middleware('auth');
+// Route untuk user dengan Role 'Admin' yang telah terautentikasi
+Route::middleware(['auth', 'rolecheck:Admin'])->group(function() {
+    Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('admin/menu', [AdminMenuController::class, 'index'])->name('admin.menu');
+    Route::get('admin/menu/add', [AdminMenuController::class, 'create'])->name('admin.menu-add');
+    Route::post('admin/menu/store', [AdminMenuController::class, 'store'])->name('admin.menu-store');
+    Route::get('admin/menu/{id_menu}/edit', [AdminMenuController::class, 'edit'])->name('admin.menu-edit');
+    Route::put('admin/menu/{id_menu}', [AdminMenuController::class, 'update'])->name('admin.menu-update');
+    Route::delete('admin/menu/{id_menu}', [AdminMenuController::class, 'destroy'])->name('admin.menu-destroy');
+    Route::post('admin/logout', [LoginController::class, 'logout'])->name('logout.admin');
+});

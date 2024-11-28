@@ -21,13 +21,46 @@
                         <div class="absolute left-3 flex items-center h-full pointer-events-none">
                             <i class="fa-solid fa-user" style="color: #4b5563;"></i>
                         </div>
-                        <input type="text" id="full_name" name="nama" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter the name as it is on the ID card" value="{{ old('nama_pelanggan') }}">
+                        <input type="text" id="full_name" name="nama" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="John Doe" value="{{ old('nama_pelanggan') }}">
                     </div>
                     <p class="text-sm font-medium text-red-600 h-2">
                         @error('nama_pelanggan')
                             {{ $message }}
                         @enderror
                     </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-x-5 mb-3">
+                    <div>
+                        <label for="email" class="text-lg font-sans font-bold">Email Address</label>
+                        <div class="relative mt-2 flex items-center">
+                            <div class="absolute left-3 flex items-center h-full pointer-events-none">
+                                <i class="fa-solid fa-envelope" style="color: #4b5563;"></i>
+                            </div>
+                            <input type="email" id="email" name="email" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="johndoe@gmail.com" value="{{ old('email') }}">
+                        </div>
+                        <p class="text-sm font-medium text-red-600 h-2">
+                            @error('email')
+                                {{ $message }}
+                            @enderror
+                        </p>
+                    </div>
+
+                    <div>
+                        <label for="phone_number" class="text-lg font-sans font-bold">Phone Number</label>
+                        <div class="relative mt-2 flex items-center">
+                            <div class="absolute left-3 flex items-center h-full pointer-events-none">
+                                <i class="fa-solid fa-phone" style="color: #4b5563;"></i>
+                            </div>
+                            <input type="text" id="phone_number" name="no_hp" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="08XXXXXXXXXX" value="{{ old('no_hp') }}">
+                        </div>
+                        <p class="text-sm font-medium text-red-600 h-2">
+                            @error('no_hp')
+                                {{ $message }}
+                            @enderror
+                        </p>
+                    </div>
+
                 </div>
 
                 <div class="mb-3">
@@ -40,21 +73,6 @@
                     </div>
                     <p class="text-sm font-medium text-red-600 h-2">
                         @error('alamat')
-                            {{ $message }}
-                        @enderror
-                    </p>
-                </div>
-
-                <div class="mb-3">
-                    <label for="phone_number" class="text-lg font-sans font-bold">Phone Number</label>
-                    <div class="relative mt-2 flex items-center">
-                        <div class="absolute left-3 flex items-center h-full pointer-events-none">
-                            <i class="fa-solid fa-phone" style="color: #4b5563;"></i>
-                        </div>
-                        <input type="text" id="phone_number" name="no_hp" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter your phone number (Ex: +62xxxxxxxxxxx)" value="{{ old('no_hp') }}">
-                    </div>
-                    <p class="text-sm font-medium text-red-600 h-2">
-                        @error('no_hp')
                             {{ $message }}
                         @enderror
                     </p>
@@ -96,12 +114,9 @@
             </form>
 
             <div class="self-center">
-                <a href="{{ route('login') }}" class="font-sans font-normal text-base">Already have an account? <span class="text-blue-700">Sign In!</span></a>
+            <span class="font-sans font-normal text-base">Already have an account? <a href="{{ route('login') }}" class="text-blue-700">Sign In!</a></span>
             </div>
         </div>
-
-        <!-- Copyright notice positioned at the bottom -->
-        <p class="self-center font-sans text-base text-gray-400 mb-4">&copy; Copyright by CakeScript. All rights reserved.</p>
     </div>
 </div>
 @endsection

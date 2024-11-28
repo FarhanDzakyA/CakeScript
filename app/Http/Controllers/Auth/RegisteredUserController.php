@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class RegisteredUserController extends Controller
 {
     public function index() {
-        return view('register', [
+        return view('auth.register', [
             'title' => "Sign Up",
         ]);
     }
@@ -17,8 +19,9 @@ class RegisteredUserController extends Controller
     public function store(Request $request) {
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
+            'email' =>'required|email:dns|unique:users,email',
             'alamat' => 'required',
-            'no_hp' => 'required|max:14',
+            'no_hp' => 'required|min:10|max:13|unique:users,no_hp',
             'password' => 'required|confirmed|min:6|max:50',
             'password_confirmation' => 'required',
         ]);
@@ -27,8 +30,11 @@ class RegisteredUserController extends Controller
         $validatedData['role'] = 'User';
         $validatedData['password'] = bcrypt($validatedData['password']);
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
+        event(new Registered($user));
 
-        return redirect('/login')->with('success', 'Registration successfully! Please Sign In');
+        Auth::login($user);
+
+        return redirect('/email/verify');
     }
 }

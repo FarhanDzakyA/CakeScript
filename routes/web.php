@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminMenuController;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 
@@ -24,10 +26,22 @@ Route::middleware(['guest'])->group(function() {
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.process');
     Route::get('/register', [RegisteredUserController::class, 'index'])->name('regist');
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('regist.store');
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordIndex'])->name('password.request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'forgotPasswordStore'])->name('password.email');
+    Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'resetPasswordIndex'])->name('password.reset');
+    Route::post('/reset-password', [ForgotPasswordController::class, 'resetPasswordStore'])->name('password.update');
+});
+
+
+// Route untuk melakukan verifikasi email
+Route::middleware(['auth'])->group(function() {
+    Route::get('/email/verify', [VerifyEmailController::class, 'verifyIndex'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
+    Route::post('/email/verification-notification', [VerifyEmailController::class, 'resendEmail'])->middleware(['throttle:6,1'])->name('verification.send');
 });
 
 // Route untuk user dengan Role 'User' yang telah terautentikasi
-Route::middleware(['auth', 'rolecheck:User'])->group(function() {
+Route::middleware(['auth', 'rolecheck:User', 'verified'])->group(function() {
     Route::get('/', [UserController::class, 'indexHome'])->name('home');
     Route::get('/menu', [UserController::class, 'indexMenu'])->name('menu');
     Route::get('/about', [UserController::class, 'indexAbout'])->name('about');

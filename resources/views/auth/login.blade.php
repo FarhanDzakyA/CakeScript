@@ -13,6 +13,10 @@
             <p class="mb-4 text-4xl font-sans font-bold">Sign In to your Account</p>
             <p class="text-lg font-sans font-normal mb-6">Ready to treat yourself? Sign in to explore <br> delicious cakes made just for you.</p>
 
+            @if(session('status'))
+                <p class="w-full p-2.5 mb-4 bg-green-100 text-start text-green-500 rounded-md">{{ session('status') }}</p>
+            @endif
+
             <form action="{{ route('login.process') }}" method="POST" class="w-full mb-6">
                 @csrf
 
@@ -22,7 +26,7 @@
                         <div class="absolute left-3 flex items-center h-full pointer-events-none">
                             <i class="fa-solid fa-user" style="color: #4b5563;"></i>
                         </div>
-                        <input type="text" id="username" name="nama" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter the full name used when register account" value="{{ old('nama_pelanggan') }}" autofocus>
+                        <input type="text" id="username" name="identifier" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter your registered name or email" value="{{ old('identifier') }}" autofocus>
                     </div>
                     <p class="text-sm font-medium text-red-600 h-2">
                         @error('nama_pelanggan')
@@ -45,7 +49,7 @@
                         @enderror
                     </p>
                     <div class="flex justify-end">
-                        <a href="" class="text-blue-700 font-sans text-base">Forgot Password?</a>
+                        <a href="{{ route('password.request') }}" class="text-blue-700 font-sans text-base">Forgot Password?</a>
                     </div>
                 </div>
 
@@ -57,12 +61,9 @@
             </form>
 
             <div class="self-center">
-                <a href="{{ route('regist') }}" class="font-sans font-normal text-base">Don't you have an account? <span class="text-blue-700">Sign Up!</span></a>
+                <span class="font-sans font-normal text-base">Don't you have an account? <a href="{{ route('regist') }}" class="text-blue-700">Sign Up!</a></span>
             </div>
         </div>
-
-        <!-- Copyright notice positioned at the bottom -->
-        <p class="self-center font-sans text-base text-gray-400 mb-4">&copy; Copyright by CakeScript. All rights reserved.</p>
     </div>
 </div>
 @endsection

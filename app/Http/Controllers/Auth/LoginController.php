@@ -9,16 +9,23 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index() {
-        return view('login', [
+        return view('auth.login', [
             'title' => "Sign In",
         ]);
     }
 
     public function authenticate(Request $request) {
         $credentials = $request->validate([
-            'nama' => 'required',
+            'identifier' => 'required',
             'password' => 'required',
         ]);
+
+        $loginField = filter_var($credentials['identifier'], FILTER_VALIDATE_EMAIL) ? 'email' : 'nama';
+
+        $credentials = [
+            $loginField => $credentials['identifier'],
+            'password' => $credentials['password'],
+        ];
 
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();

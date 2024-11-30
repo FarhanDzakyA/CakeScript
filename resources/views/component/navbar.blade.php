@@ -48,7 +48,7 @@
                 <div class="z-50 hidden w-36 my-4 text-base list-none bg-gray-50 divide-y divide-gray-300 rounded-lg shadow" id="user-dropdown">
                     <ul class="py-2" aria-labelledby="user-menu-button">
                         <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Profile</a>
+                            <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Profile</a>
                         </li>
                         <li>
                             <form action="{{ route('logout.user') }}" method="POST">

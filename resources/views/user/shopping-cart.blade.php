@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="bg-gray-100 min-h-[calc(100vh-64px-220px)] py-12 px-32">
-    <div class="w-full flex justify-between items-center mb-8">
+    <div class="flex flex-col items-center mb-4" data-aos="fade-up">
+        <p class="font-bold text-6xl text-brown mb-6">Deliver Time</p>
+        <p class="w-2/3 text-center font-semibold">Setiap Hari, 08:00 - 21:00 WIB</p>
+    </div>
+
+    <div class="w-full flex justify-between items-center mb-8" data-aos="fade-up">
         <p class="text-xl font-bold">Shopping Cart</p>
         <a href="{{ route('menu') }}" class="flex items-center text-leaf gap-x-2">
             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -12,7 +17,7 @@
         </a>
     </div>
 
-    <div class="grid grid-cols-3 gap-x-12">
+    <div class="grid grid-cols-3 gap-x-12" data-aos="zoom-in">
         <div class="col-span-2 bg-white rounded-lg shadow-md border border-gray-300 p-4 cart-list">
             
         </div>

@@ -21,10 +21,10 @@
                         <div class="absolute left-3 flex items-center h-full pointer-events-none">
                             <i class="fa-solid fa-user" style="color: #4b5563;"></i>
                         </div>
-                        <input type="text" id="full_name" name="nama" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="John Doe" value="{{ old('nama_pelanggan') }}">
+                        <input type="text" id="full_name" name="nama" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="John Doe" value="{{ old('nama') }}">
                     </div>
                     <p class="text-sm font-medium text-red-600 h-2">
-                        @error('nama_pelanggan')
+                        @error('nama')
                             {{ $message }}
                         @enderror
                     </p>

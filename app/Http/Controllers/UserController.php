@@ -47,19 +47,21 @@ class UserController extends Controller
     }
 
     public function indexAbout() {
-        $data = [
-            'title' => "About Us",
-        ];
+        $title = 'About Us';
     
-        return view('user.about-us', $data);
+        return view('user.about-us', compact('title'));
     }
 
     public function indexContact() {
-        $data = [
-            'title' => "Contact",
-        ];
+        $title = 'Contact';
         
-        return view('user.contact', $data);
+        return view('user.contact', compact('title'));
+    }
+
+    public function indexProfile() {
+        $title = 'Profile';
+
+        return view('user.profile', compact('title'));
     }
 
     public function indexCart() {
@@ -148,5 +150,33 @@ class UserController extends Controller
         $order->delete();
 
         return redirect()->route('orders')->with('cancel-success', 'Pesanan Berhasil Dibatalkan');
+    }
+
+    public function updateProfile(Request $request) {
+        $validatedData = $request->validate([
+            'nama' => 'required|max:255',
+            'email' =>'required|email:dns|unique:users,email,' . auth()->id(),
+            'alamat' => 'required',
+            'no_hp' => 'required|min:10|max:13|unique:users,no_hp,' . auth()->id()
+        ]);
+
+        $oldEmail = auth()->user()->email;
+
+        auth()->user()->update([
+            'nama' => $validatedData['nama'],
+            'email' => $validatedData['email'],
+            'alamat' => $validatedData['alamat'],
+            'no_hp' => $validatedData['no_hp']
+        ]);
+
+        if($oldEmail != $request->email) {
+            auth()->user()->update([
+                'email_verified_at' => null
+            ]);
+
+            auth()->user()->sendEmailVerificationNotification();
+        }
+
+        return redirect()->back()->with('success', 'Profile Updated.');
     }
 }

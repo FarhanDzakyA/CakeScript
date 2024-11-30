@@ -11,9 +11,9 @@ use Illuminate\Auth\Events\Registered;
 class RegisteredUserController extends Controller
 {
     public function index() {
-        return view('auth.register', [
-            'title' => "Sign Up",
-        ]);
+        $title = 'Sign Up';
+
+        return view('auth.register', compact('title'));
     }
 
     public function store(Request $request) {

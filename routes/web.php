@@ -48,6 +48,8 @@ Route::middleware(['auth', 'rolecheck:User', 'verified'])->group(function() {
     Route::get('/menu', [UserController::class, 'indexMenu'])->name('menu');
     Route::get('/about', [UserController::class, 'indexAbout'])->name('about');
     Route::get('/contact', [UserController::class, 'indexContact'])->name('contact');
+    Route::get('/profile', [UserController::class, 'indexProfile'])->name('profile');
+    Route::put('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
     Route::get('/shopping-cart', [UserController::class, 'indexCart'])->name('cart');
     Route::post('/checkout', [UserController::class, 'checkoutProcess'])->name('checkout');
     Route::get('/orders', [UserController::class, 'indexOrder'])->name('orders');

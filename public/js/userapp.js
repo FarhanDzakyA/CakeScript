@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const userDropdown = document.getElementById('user-dropdown');
     const cartList = document.querySelector('.cart-list');
     const orderButton = document.getElementById('order-button');
+    const openHour = 8;
+    const closeHour = 21;
     const formatter = new Intl.NumberFormat('id-ID', {
         style: 'currency',
         currency: 'IDR',
@@ -61,6 +63,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    updateCartBadge();
+
     // Add the menu into the cart list
     document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', () => {
@@ -107,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
               toastr.success('Menu berhasil ditambahkan!', 'Success');
 
               updateCartBadge();
+              updateTime();
         });
     });     
 
@@ -176,19 +181,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 event.preventDefault();
                 removeFromCart(button.dataset.id);
                 updateCartBadge();
+                updateTime();
             });
         });
     
         cartList.querySelectorAll('.increase-quantity').forEach(button => {
             button.addEventListener('click', () => changeQuantity(button.dataset.id, 1));
             updateCartBadge();
+            updateTime();
         });
     
         cartList.querySelectorAll('.decrease-quantity').forEach(button => {
             button.addEventListener('click', () => changeQuantity(button.dataset.id, -1));
             updateCartBadge();
+            updateTime();
         });
-    }    
+    }
+
+    loadCartFromStorage();
 
     // Fungsi untuk menghapus item dari session storage
     function removeFromCart(id) {
@@ -207,6 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (item.quantity <= 0) {
                 removeFromCart(id);
                 updateCartBadge();
+                updateTime();
             } else {
                 sessionStorage.setItem('cart', JSON.stringify(cartData));
                 loadCartFromStorage();
@@ -237,7 +248,24 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('checkout-form').submit();
     });
 
-    // Muat data keranjang saat halaman dimuat
-    updateCartBadge();
-    loadCartFromStorage();
+    function updateTime() {
+        const now = new Date();
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        const wib = new Date(utc + (7 * 60 * 60 * 1000));
+        const hours = wib.getHours();
+
+        if (hours < openHour || hours >= closeHour) {
+            orderButton.disabled = true;
+            orderButton.textContent = "Pesanan Ditutup";
+            orderButton.title = "Pesanan hanya dapat dilakukan pada pukul 08:00 - 21:00 WIB ";
+        } else {
+            orderButton.disabled = false;
+            orderButton.textContent = "Pesan";
+            orderButton.title = "";
+        }
+
+        setTimeout(updateTime, 5000);
+    }
+
+    updateTime();
 });

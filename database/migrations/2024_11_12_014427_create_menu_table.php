@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('menu_description', length: 255);
             $table->integer('menu_price');
             $table->string('photo_url');
+            $table->enum('availability', ['0', '1'])->default('1');
             $table->timestamps();
         });
     }

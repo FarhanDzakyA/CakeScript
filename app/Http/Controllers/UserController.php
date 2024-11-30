@@ -13,6 +13,7 @@ class UserController extends Controller
     public function indexHome() {
         $title = 'Home';
         $top_product = Menu::withSum('orderDetails as total_quantity_sold', 'quantity')
+            ->whereNot('availability', '0')
             ->orderBy('total_quantity_sold', 'desc')
             ->take(5)
             ->get();
@@ -22,11 +23,25 @@ class UserController extends Controller
 
     public function indexMenu() {
         $title = 'Menu';
-        $all_menu = Menu::orderBy('menu_name', 'asc')->get();
-        $bread_menu = Menu::where('id_category', 1)->orderBy('menu_name', 'asc')->get();
-        $cake_menu = Menu::where('id_category', 2)->orderBy('menu_name', 'asc')->get();
-        $donuts_menu = Menu::where('id_category', 3)->orderBy('menu_name', 'asc')->get();
-        $pastry_menu = Menu::where('id_category', 4)->orderBy('menu_name', 'asc')->get();
+        $all_menu = Menu::whereNot('availability', '0')
+                        ->orderBy('menu_name', 'asc')
+                        ->get();
+        $bread_menu = Menu::where('id_category', 1)
+                        ->whereNot('availability', '0')
+                        ->orderBy('menu_name', 'asc')
+                        ->get();
+        $cake_menu = Menu::where('id_category', 2)
+                        ->whereNot('availability', '0')
+                        ->orderBy('menu_name', 'asc')
+                        ->get();
+        $donuts_menu = Menu::where('id_category', 3)
+                        ->whereNot('availability', '0')
+                        ->orderBy('menu_name', 'asc')
+                        ->get();
+        $pastry_menu = Menu::where('id_category', 4)
+                        ->whereNot('availability', '0')
+                        ->orderBy('menu_name', 'asc')
+                        ->get();
     
         return view('user.menu', compact('title', 'all_menu', 'bread_menu', 'cake_menu', 'donuts_menu', 'pastry_menu'));
     }
@@ -56,10 +71,10 @@ class UserController extends Controller
     public function indexOrder() {
         $title = 'Order History';
         $orders = Orders::with(['details.menu'])
-            ->where('id_user', Auth::id())
-            ->orderByRaw("CASE WHEN `status` = 'pending' THEN 1 ELSE 2 END")
-            ->orderBy('created_at', 'desc')
-            ->get();
+                        ->where('id_user', Auth::id())
+                        ->orderByRaw("CASE WHEN `status` = 'pending' THEN 1 ELSE 2 END")
+                        ->orderBy('created_at', 'desc')
+                        ->get();
 
         return view('user.order', compact('title', 'orders'));
     }

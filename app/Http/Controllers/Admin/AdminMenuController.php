@@ -49,7 +49,7 @@ class AdminMenuController extends Controller
             'photo_url'    => $photoName
         ]);
 
-        return redirect()->route('admin.menu')->with(['success' => 'Data Menu Berhasil Disimpan!']);
+        return redirect()->route('admin.menu')->with(['add-success' => 'Menu Data Saved Successfully!']);
     }
 
     public function edit($id_menu) {
@@ -73,7 +73,7 @@ class AdminMenuController extends Controller
 
         if($request->hasFile('photo_url')) {
             if ($menu->photo_url && Storage::exists('public/uploads/' . $menu->photo_url)) {
-                Storage::delete('public/uploads' . $menu->photo_url); // Menghapus foto lama
+                Storage::delete('public/uploads' . $menu->photo_url);
             }
 
             $photo = $request->file('photo_url');
@@ -91,7 +91,7 @@ class AdminMenuController extends Controller
             'photo_url'    => $photoName
         ]);
 
-        return redirect()->route('admin.menu')->with(['success' => 'Data Menu Berhasil Diubah!']);
+        return redirect()->route('admin.menu')->with(['edit-success' => 'Menu Data Changed Successfully!']);
     }
 
     public function destroy($id_menu): RedirectResponse
@@ -99,11 +99,31 @@ class AdminMenuController extends Controller
         $menu = Menu::findOrFail($id_menu);
 
         if($menu->photo_url && Storage::exists('public/uploads/' . $menu->photo_url)) {
-            Storage::delete('public/uploads' . $menu->photo_url); // Menghapus foto lama
+            Storage::delete('public/uploads' . $menu->photo_url);
         }
 
         $menu->delete();
 
-        return redirect()->route('admin.menu')->with(['success' => 'Data Menu Berhasil Dihapus!']);
+        return redirect()->route('admin.menu')->with(['delete-success' => 'Menu Data Deleted Successfully!']);
+    }
+
+    public function disableMenu($id_menu) {
+        $menu = Menu::findOrFail($id_menu);
+
+        $menu->update([
+            'availability' => '0'
+        ]);
+
+        return redirect()->back()->with(['disable-success' => 'Menu Data Has Been Disabled']);
+    }
+
+    public function enableMenu($id_menu) {
+        $menu = Menu::findOrFail($id_menu);
+
+        $menu->update([
+            'availability' => '1'
+        ]);
+
+        return redirect()->back()->with(['enable-success' => 'Menu Data Has Been Enabled']);
     }
 }

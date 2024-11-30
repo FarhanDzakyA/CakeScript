@@ -147,8 +147,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 <img src="${item.image}" class="h-36 w-36 object-center object-cover rounded-lg" alt="">
                 <div class="flex flex-col grow">
                     <p class="text-2xl font-bold mb-2">${item.name}</p>
-                    <div class="flex gap-x-4">
+                    <div class="flex gap-x-2 items-center">
                         <p class="text-base font-semibold">${formatter.format(item.price)}</p>
+                        <p class="text-base align-middle">x</p>
                         <div class="flex items-center gap-x-2">
                             <button class="decrease-quantity bg-white px-2 rounded-md font-semibold border border-gray-300 shadow hover:bg-leaf hover:border-leaf hover:text-white" data-id="${item.id}">-</button>
                             <span>${item.quantity}</span>

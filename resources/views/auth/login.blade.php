@@ -29,7 +29,7 @@
                         <input type="text" id="username" name="identifier" class="w-full bg-transparent border-2 border-gray-600 text-gray-600 font-sans text-base rounded-xl focus:ring-2 focus:ring-leaf focus:border-leaf focus:outline-none ps-10 p-2.5" placeholder="Enter your registered name or email" value="{{ old('identifier') }}" autofocus>
                     </div>
                     <p class="text-sm font-medium text-red-600 h-2">
-                        @error('nama_pelanggan')
+                        @error('identifier')
                             {{ $message }}
                         @enderror
                     </p>

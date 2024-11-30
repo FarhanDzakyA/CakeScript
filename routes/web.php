@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminTransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/email/verify', [VerifyEmailController::class, 'verifyIndex'])->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
     Route::post('/email/verification-notification', [VerifyEmailController::class, 'resendEmail'])->middleware(['throttle:6,1'])->name('verification.send');
+    Route::post('/email/verify/logout', [LoginController::class, 'logout'])->name('email.logout');
 });
 
 // Route untuk user dengan Role 'User' yang telah terautentikasi
@@ -63,5 +65,10 @@ Route::middleware(['auth', 'rolecheck:Admin'])->group(function() {
     Route::get('admin/menu/{id_menu}/edit', [AdminMenuController::class, 'edit'])->name('admin.menu-edit');
     Route::put('admin/menu/{id_menu}', [AdminMenuController::class, 'update'])->name('admin.menu-update');
     Route::delete('admin/menu/{id_menu}', [AdminMenuController::class, 'destroy'])->name('admin.menu-destroy');
+    Route::put('admin/menu/disable/{id_menu}', [AdminMenuController::class, 'disableMenu'])->name('admin.menu-disable');
+    Route::put('admin/menu/enable/{id_menu}', [AdminMenuController::class, 'enableMenu'])->name('admin.menu-enable');
+    Route::get('admin/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions');
+    Route::put('admin/transactions/deliver-order/{id}', [AdminTransactionController::class, 'deliverOrder'])->name('admin.transactions-deliver');
+    Route::put('admin/transactions/complete-order/{id}', [AdminTransactionController::class, 'completeOrder'])->name('admin.transactions-complete');
     Route::post('admin/logout', [LoginController::class, 'logout'])->name('logout.admin');
 });

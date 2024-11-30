@@ -24,7 +24,8 @@ class Menu extends Model
         'menu_name',
         'menu_description',
         'menu_price',
-        'photo_url'
+        'photo_url',
+        'availability',
     ];
 
     public function orderDetails() {

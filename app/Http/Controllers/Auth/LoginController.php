@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index() {
-        return view('auth.login', [
-            'title' => "Sign In",
-        ]);
+        $title = 'Sign In';
+
+        return view('auth.login', compact('title'));
     }
 
     public function authenticate(Request $request) {
@@ -41,7 +41,7 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'password' => 'The provided credentials do not match our records',
-        ]);
+        ])->withInput();
     }
 
     public function logout(Request $request) {

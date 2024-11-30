@@ -1,9 +1,9 @@
 @extends('layouts.admin-app')
 
 @section('breadcrumbs')
-<a href="{{ route('admin.menu') }}" class="text-xl font-bold text-black hover:text-blue-600">Menu</a>
-<span class="text-xl font-bold text-black select-none">></span>
-<span class="text-xl font-bold text-black">Edit Menu</span>
+<a href="{{ route('admin.menu') }}" class="text-xl font-bold text-leaf hover:text-darkleaf">Menu</a>
+<span class="text-xl font-bold text-leaf select-none">></span>
+<span class="text-xl font-bold text-leaf">Edit Menu</span>
 @endsection
 
 @section('content')

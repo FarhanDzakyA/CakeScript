@@ -32,7 +32,7 @@
             <div class="hidden grid grid-cols-4 gap-6" id="all" role="tabpanel" aria-labelledby="all-tab">
                 @forelse($all_menu as $menu)
                     <div class="flex flex-col bg-white rounded-lg shadow-lg">
-                        <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Menu Photo" class="w-full object-cover object-center rounded-t-lg">
+                        <img src="{{ asset('storage/uploads/' . $menu->photo_url) }}" alt="Menu Photo" class="w-full object-cover object-center rounded-t-lg aspect-[1/1]">
                         <div class="flex flex-col items-center justify-start px-4 pb-4 pt-8 rounded-b-lg">
                             <h3 class="text-xl text-center font-bold mb-2">{{ $menu->menu_name }}</h3>
                             <p class="grow text-gray-700 text-center mb-4 h-24">{{ $menu->menu_description }}</p>

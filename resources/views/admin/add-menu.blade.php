@@ -1,9 +1,9 @@
 @extends('layouts.admin-app')
 
 @section('breadcrumbs')
-<a href="{{ route('admin.menu') }}" class="text-xl font-bold text-black hover:text-blue-600">Menu</a>
-<span class="text-xl font-bold text-black select-none">></span>
-<span class="text-xl font-bold text-black">Tambah Menu</span>
+<a href="{{ route('admin.menu') }}" class="text-xl font-bold text-leaf hover:text-darkleaf">Menu</a>
+<span class="text-xl font-bold text-leaf select-none">></span>
+<span class="text-xl font-bold text-leaf">Add Menu</span>
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
                     <select name="id_category" id="" class="block w-full px-3 py-2 border border-gray-400 rounded-lg focus:ring-1 focus:ring-leaf focus:border-2 focus:border-leaf focus:outline-none placeholder:text-slate-400 @error('id_category') border-red-500 @enderror">
                         <option value="" selected disabled>-- Pilih Kategori --</option>
                         @foreach($categories as $category)
-                        <option value="{{ $category->id_category }}">{{ $category->category_name }}</option>
+                            <option value="{{ $category->id_category }}" {{ old('id_category') == $category->id_category ? 'selected' : '' }}>{{ $category->category_name }}</option>
                         @endforeach
                     </select>
                     @error('id_category')

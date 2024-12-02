@@ -3,11 +3,11 @@
     @section('content')
     <div class="bg-gray-100 py-16 px-32">
         <div class="grid grid-cols-5">
-            <div class="col-span-2">
+            <div class="col-span-2" data-aos="fade-right">
                 <p class="font-medium text-lg text-brown">Profile Information</p>
                 <p class="text-gray-700">Update your account's profile information and email address.</p>
             </div>
-            <div class="col-span-3">
+            <div class="col-span-3" data-aos="fade-left">
                 <div class="w-full bg-white rounded-md shadow-md p-5">
                     <form action="{{ route('profile.update') }}" method="POST">
                         @csrf

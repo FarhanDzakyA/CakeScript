@@ -113,7 +113,14 @@ document.addEventListener("DOMContentLoaded", function() {
               updateCartBadge();
               updateTime();
         });
-    });     
+    });
+
+    document.querySelector('.logout-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        sessionStorage.removeItem('cart');
+        console.log('hapus cart');
+        this.submit();
+    });
 
     function loadCartFromStorage() {
         const cartData = JSON.parse(sessionStorage.getItem('cart')) || [];

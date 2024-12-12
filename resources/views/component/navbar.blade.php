@@ -51,7 +51,7 @@
                             <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Profile</a>
                         </li>
                         <li>
-                            <form action="{{ route('logout.user') }}" method="POST">
+                            <form action="{{ route('logout.user') }}" method="POST" class="logout-form">
                                 @csrf
                                 <button type="submit" class="block px-4 py-2 w-full text-sm text-start text-gray-700 hover:bg-gray-300">Sign Out</button>
                             </form>

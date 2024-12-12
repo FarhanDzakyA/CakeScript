@@ -118,7 +118,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('.logout-form').addEventListener('submit', function(event) {
         event.preventDefault();
         sessionStorage.removeItem('cart');
-        console.log('hapus cart');
         this.submit();
     });
 
